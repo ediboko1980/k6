@@ -261,6 +261,11 @@ func showProgress(
 	for {
 		select {
 		case <-ctxDone:
+			// FIXME: Remove this...
+			// Add a small delay to allow executors time to process
+			// the done context, so that the correct status symbol is
+			// outputted for each progress bar.
+			time.Sleep(50 * time.Millisecond)
 			renderProgressBars(false)
 			printProgressBars()
 			return
